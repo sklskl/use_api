@@ -1,4 +1,5 @@
 import requests
+from plotly import offline
 
 url = 'https://api.github.com/search/repositories?q=language:java&sort=stars'
 headers = {'Accept': 'application/vnd.github.v3+json'}
@@ -20,10 +21,12 @@ data = [{
     'y': stars
 }]
 my_layout = {
-    'title': 'GitHub上最受欢迎的Python项目'
+    'title': 'GitHub上最受欢迎的Python项目',
+    'xaxis': {'title': 'Repository'},
+    'yaxis': {'title': 'Stars'}
 }
-
-
+fig = {'data': data, 'layout': my_layout}
+offline.plot(fig, filename = 'python.repos_html')
 
 
 
